@@ -1,0 +1,55 @@
+CREATE DATABASE safety;
+USE safety;
+
+-- DRIVER TABLE
+CREATE TABLE driver(
+    username VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(50),
+    contact VARCHAR(20),
+    email VARCHAR(100),
+    address VARCHAR(200),
+    vehicle VARCHAR(50)
+);
+
+-- USER TABLE
+CREATE TABLE register(
+    username VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(50),
+    contact VARCHAR(20),
+    email VARCHAR(100),
+    address VARCHAR(200)
+);
+
+-- LOCATION TABLE (NO OTP)
+CREATE TABLE location(
+    driver VARCHAR(50),
+    location_name VARCHAR(100),
+    lat FLOAT,
+    lon FLOAT
+);
+
+-- RIDE TABLE (CLEAN)
+CREATE TABLE ride(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    driver VARCHAR(50),
+    user VARCHAR(50),
+    status VARCHAR(20),
+    source_lat FLOAT,
+    source_lon FLOAT,
+    destination VARCHAR(100),
+    fare FLOAT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- FEEDBACK TABLE
+CREATE TABLE feedback(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ride_id INT,
+    rating INT,
+    comment TEXT
+);
+
+
+
+DROP DATABASE safety;
+DROP DATABASE IF EXISTS safety;

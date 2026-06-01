@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup - SafeRide+</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>📝 Signup</h1>
+    <p>Create your SafeRide account</p>
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="/">Home</a>
+    <a href="/login/">Login</a>
+</div>
+
+<!-- FORM -->
+<div class="container">
+    <div class="card">
+
+        <form action="/SignupAction" method="post">
+            {% csrf_token %}
+
+            <input type="text" name="t1" placeholder="Username" required>
+            <input type="password" name="t2" placeholder="Password" required>
+            <input type="text" name="t3" placeholder="Contact Number" required>
+            <input type="email" name="t4" placeholder="Email" required>
+            <input type="text" name="t5" placeholder="Address" required>
+
+            <!-- USER TYPE -->
+            <select name="user_type" required>
+                <option value="user">Passenger</option>
+                <option value="driver">Driver</option>
+            </select>
+
+            <!-- VEHICLE -->
+            <input type="text" name="t6" placeholder="Vehicle Number (only for Driver)">
+
+            <button type="submit">Register</button>
+
+        </form>
+
+        <!-- MESSAGE -->
+        {% if data %}
+            <p style="text-align:center; margin-top:10px; color:green;">
+                {{ data }}
+            </p>
+        {% endif %}
+
+    </div>
+</div>
+
+</body>
+</html>

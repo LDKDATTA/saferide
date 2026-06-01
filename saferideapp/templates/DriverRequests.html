@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ride Requests - SafeRide+</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>📥 Ride Requests</h1>
+    <p>Manage and track your ride requests easily</p>
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="/">🏠 Home</a>
+    <a href="/driver_location/">📍 Update Location</a>
+    <a href="/logout/">🚪 Logout</a>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+    <div class="card">
+        <h2>🚗 Incoming Requests</h2>
+
+        {% if rides %}
+        <div class="feature-box">
+
+            {% for r in rides %}
+            <div style="background:#fff;padding:18px;border-radius:15px;
+                        box-shadow:0 10px 25px rgba(0,0,0,0.15);
+                        text-align:center;transition:0.3s;">
+
+                <h3>👤 Passenger: {{ r.1 }}</h3>
+                <p><b>Status:</b> {{ r.2 }}</p>
+
+                <!-- ACTION BUTTONS -->
+                <div style="margin-top:10px;">
+
+                    {% if r.2 == "requested" %}
+                        <a href="/accept/{{ r.0 }}/">
+                            <button>✅ Accept</button>
+                        </a>
+                    {% endif %}
+
+                    {% if r.2 == "accepted" %}
+                        <a href="/start/{{ r.0 }}/">
+                            <button>🚀 Start Ride</button>
+                        </a>
+                    {% endif %}
+
+                    {% if r.2 == "started" %}
+                        <a href="/complete/{{ r.0 }}/">
+                            <button>🏁 Complete Ride</button>
+                        </a>
+                    {% endif %}
+
+                </div>
+
+                <!-- COMPLETED STATUS -->
+                {% if r.2 == "completed" %}
+                    <p style="margin-top:10px;color:green;font-weight:bold;">
+                        ✔ Ride Completed
+                    </p>
+                {% endif %}
+
+            </div>
+            {% endfor %}
+
+        </div>
+        {% else %}
+            <p style="text-align:center;margin-top:20px;">
+                ❌ No ride requests available
+            </p>
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

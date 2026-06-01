@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard - SafeRide+</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="hero">
+    <h1>👩‍💼 Welcome {{ user }}</h1>
+    <p>Your SafeRide Dashboard</p>
+</div>
+
+<div class="navbar">
+    <a href="/">Home</a>
+    <a href="/share_location/">Book Ride</a>
+    <a href="/panic/">Raise Alert</a>
+    <a href="/past_rides/">Past Rides</a>
+    <a href="/logout/">Logout</a>
+</div>
+
+<div class="container">
+
+    {% if data %}
+    <div class="card">
+        <h3 style="text-align:center;">{{ data }}</h3>
+    </div>
+    {% endif %}
+
+    <div class="card">
+        <h2>Your Ride Status</h2>
+
+        {% for r in rides %}
+        <div style="margin:10px;padding:15px;background:#fff;border-radius:10px;">
+            <p><b>Driver:</b> {{ r.0 }}</p>
+            <p><b>Status:</b> {{ r.1 }}</p>
+            <p><b>Fare:</b> ₹{{ r.2 }}</p>
+        </div>
+        {% empty %}
+        <p style="text-align:center;">No rides yet</p>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

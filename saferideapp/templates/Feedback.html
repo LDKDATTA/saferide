@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback - SafeRide+</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>⭐ Feedback</h1>
+    <p>Rate your ride experience</p>
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="/">Home</a>
+    <a href="/past_rides/">Back</a>
+    <a href="/login/">Logout</a>
+</div>
+
+<!-- FEEDBACK FORM -->
+<div class="container">
+    <div class="card">
+
+        <h2>Share Your Experience</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- RATING -->
+            <label>Rating (1 to 5)</label>
+            <input type="number" name="rating" min="1" max="5" required>
+
+            <!-- COMMENT -->
+            <label>Comments</label>
+            <textarea name="comment" rows="4" placeholder="Write your feedback..." required 
+                style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd;"></textarea>
+
+            <button type="submit">Submit Feedback</button>
+
+        </form>
+
+        <!-- MESSAGE -->
+        {% if data %}
+            <p style="text-align:center; margin-top:10px; color:green;">
+                {{ data }}
+            </p>
+        {% endif %}
+
+    </div>
+</div>
+
+</body>
+</html>

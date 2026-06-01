@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Driver Dashboard - SafeRide+</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>🚗 Driver Dashboard</h1>
+    <p>Welcome to SafeRide+</p>
+</div>
+
+<!-- NAVBAR (ALL ACTIONS HERE) -->
+<div class="navbar">
+    <a href="/">Home</a>
+    <a href="/driver_location/">Add Location</a>
+    <a href="/driver_requests/">Ride Requests</a>
+    <a href="/start/1/">Start Ride</a>
+    <a href="/complete/1/">Complete Ride</a>
+    <a href="/login/">Logout</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    {% if data %}
+        <div class="card">
+            <h2>{{ data }}</h2>
+        </div>
+    {% endif %}
+
+    <div class="card">
+        <h2>Welcome Driver</h2>
+        <p>Use the menu above to manage your rides.</p>
+    </div>
+
+</div>
+
+</body>
+</html>

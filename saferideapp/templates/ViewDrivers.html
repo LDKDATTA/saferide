@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Drivers - SafeRide+</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>🚖 Nearby Drivers</h1>
+    <p>Select a driver to request your ride</p>
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="/">Home</a>
+    <a href="/share_location/">Back</a>
+    <a href="/panic/">Emergency</a>
+    <a href="/login/">Logout</a>
+</div>
+
+<!-- DRIVER LIST -->
+<div class="container">
+
+    <div class="card">
+        <h2>Available Drivers</h2>
+
+        <div class="feature-box" style="display:flex; flex-wrap:wrap; justify-content:center; gap:15px;">
+
+            {% if data %}
+                {{ data|safe }}
+            {% else %}
+                <p style="text-align:center; width:100%; color:red;">
+                    ❌ No drivers available nearby
+                </p>
+            {% endif %}
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

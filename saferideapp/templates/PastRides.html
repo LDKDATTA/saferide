@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Past Rides - SafeRide+</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>📜 Past Rides</h1>
+    <p>View your ride history</p>
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="/">Home</a>
+    <a href="/share_location/">Book Ride</a>
+    <a href="/panic/">Emergency</a>
+    <a href="/logout/">Logout</a>
+</div>
+
+<!-- RIDE LIST -->
+<div class="container">
+
+    <div class="card">
+        <h2>Your Ride History</h2>
+
+        <div class="feature-box">
+
+            {% for row in data %}
+            <div style="
+                background:#fff;
+                padding:15px;
+                border-radius:12px;
+                box-shadow:0 5px 15px rgba(0,0,0,0.2);
+                text-align:center;
+            ">
+
+                <h3>🚗 Driver: {{ row.1 }}</h3>
+
+                <p><b>Status:</b> {{ row.2 }}</p>
+
+                <p><b>Destination:</b> {{ row.3 }}</p>
+
+                <p><b>Fare:</b> ₹{{ row.4 }}</p>
+
+                <!-- FEEDBACK -->
+                {% if row.2 == "completed" %}
+                <a href="/feedback/{{ row.0 }}/">
+                    <button style="
+                        background:green;
+                        color:white;
+                        border:none;
+                        padding:10px 15px;
+                        border-radius:8px;
+                        cursor:pointer;
+                    ">
+                        Give Feedback
+                    </button>
+                </a>
+                {% endif %}
+
+                <!-- CANCEL RIDE -->
+                {% if row.2 != "completed" and row.2 != "cancelled" %}
+                <a href="/cancel/{{ row.0 }}/">
+                    <button style="
+                        background:red;
+                        color:white;
+                        border:none;
+                        padding:10px 15px;
+                        border-radius:8px;
+                        cursor:pointer;
+                        margin-top:10px;
+                    ">
+                        Cancel Ride
+                    </button>
+                </a>
+                {% endif %}
+
+                <!-- CANCELLED STATUS -->
+                {% if row.2 == "cancelled" %}
+                <p style="
+                    color:red;
+                    font-weight:bold;
+                    margin-top:10px;
+                ">
+                    ❌ Ride Cancelled
+                </p>
+                {% endif %}
+
+            </div>
+
+            {% empty %}
+                <p style="text-align:center;">No rides found</p>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
